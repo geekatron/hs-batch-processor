@@ -1,5 +1,6 @@
-# Ignore the Output file
+# Ignore the Output file & built binary
 output.json
+hs-batch-processor
 
 # Binaries for programs and plugins
 *.exe
