@@ -23,41 +23,53 @@ func TestParseArgumentsMissing(t *testing.T) {
 func TestParseArgumentsInputFilename(t *testing.T) {
 	expectedInputFilename := "input.json"
 	expectedChangesFilename := "changeset.json"
+	expectedPerformanceFlag := true
 
-	i, c := parseArguments([]string{"-i", expectedInputFilename,  "-c", expectedChangesFilename})
+	i, c, p := parseArguments([]string{"-i", expectedInputFilename,  "-c", expectedChangesFilename, "-p"})
 
 	if i != expectedInputFilename {
 		t.Errorf("Expected input filename: %s, got: %s\n", expectedInputFilename, i)
 	}
 	if c != expectedChangesFilename {
 		t.Errorf("Expected changes filename: %s, got: %s\n", expectedChangesFilename, c)
+	}
+	if p != expectedPerformanceFlag {
+		t.Errorf("Expected performance to be: %t, got: %t\n", expectedPerformanceFlag, p)
 	}
 }
 
 func TestParseArgumentsUnrecognized(t *testing.T) {
 	expectedInputFilename := "mixtape.json"
 	expectedChangesFilename := "changes"
+	expectedPerformanceFlag := false
 
-	i, c := parseArguments([]string{"-z", "asldjasd", "--a", "fsfsdfsd"})
+	i, c, p := parseArguments([]string{"-z", "asldjasd", "--a", "fsfsdfsd"})
 
 	if i != expectedInputFilename {
 		t.Errorf("Expected input filename: %s, got: %s\n", expectedInputFilename, i)
 	}
 	if c != expectedChangesFilename {
 		t.Errorf("Expected changes filename: %s, got: %s\n", expectedChangesFilename, c)
+	}
+	if p != expectedPerformanceFlag {
+		t.Errorf("Expected performance to be: %t, got: %t\n", expectedPerformanceFlag, p)
 	}
 }
 
 func TestParseArgumentsNoneProvided(t *testing.T) {
 	expectedInputFilename := "mixtape.json"
 	expectedChangesFilename := "changes"
+	expectedPerformanceFlag := false
 
-	i, c := parseArguments([]string{})
+	i, c, p := parseArguments([]string{})
 
 	if i != expectedInputFilename {
 		t.Errorf("Expected input filename: %s, got: %s\n", expectedInputFilename, i)
 	}
 	if c != expectedChangesFilename {
 		t.Errorf("Expected changes filename: %s, got: %s\n", expectedChangesFilename, c)
+	}
+	if p != expectedPerformanceFlag {
+		t.Errorf("Expected performance to be: %t, got: %t\n", expectedPerformanceFlag, p)
 	}
 }

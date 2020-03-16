@@ -6,11 +6,10 @@ import (
 )
 
 func main() {
-	go PrintUsage()
-
 	// Parse input arguments
 	//	-i <input filename>
 	// 	-c <change set filename>
+	// 	-p Turn on performance logging
 
 	// If no arguments are provided assume the following:
 	//	1. Input filename is 'mixtape.json'
@@ -18,8 +17,15 @@ func main() {
 	// 	2. Output filename is 'output.json'
 
 	outputFilename := "output.json"
-	inputFilename, changesetFilename := parseArguments(os.Args[1:])
-	fmt.Printf("Input arguments:\n  Input Filename: %s\n  Change set filename: %s\n", inputFilename, changesetFilename)
+
+	inputFilename, changesetFilename, performance := parseArguments(os.Args[1:])
+	fmt.Printf("Input arguments:\n  Input Filename: %s\n  Change set filename: %s\nPerformance: %t\n",
+		inputFilename, changesetFilename, performance)
+
+	// Check if performance logging is enabled
+	if performance == true {
+		go PrintUsage()
+	}
 
 	// Decode the input file into a MixtapeIndex (map) -> We will manipulate this with changes and Encode the changes
 	// into a Mixtape struct

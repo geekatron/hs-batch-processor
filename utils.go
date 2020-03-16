@@ -17,9 +17,10 @@ import (
 //		the binary.
 // 2. Could have used a much better library but just doing some simple argument parsing in-order to ba ble to test
 //	different input files without modifying variables.
-func parseArguments(args []string) (string, string) {
+func parseArguments(args []string) (string, string, bool) {
 	iFilename := "mixtape.json"
 	cFilename := "changes"
+	performance := false
 
 	fmt.Printf("Length of arguments: %#v\n", len(args))
 
@@ -39,12 +40,14 @@ func parseArguments(args []string) (string, string) {
 				fmt.Printf("Argument %s was provided an invalid filename: %s. Using default: %s", arg, args[i+1], iFilename)
 				os.Exit(1)
 			}
+		case "-p":
+			performance = true
 		default:
 			fmt.Println("Unrecognized argument:", arg)
 		}
 	}
 
-	return iFilename, cFilename
+	return iFilename, cFilename, performance
 }
 
 // Check to see that the value after the switch flag (-e, -i) is not another command flag (-* || --*)
@@ -72,7 +75,7 @@ func PrintUsage() {
 		"\n~-=-~~-=-~~-=-~~-=-~~-=-~~-=-~~-=-~~-=-~~-=-~\n")
 
 	for ; ; {
-		time.Sleep(20 * time.Microsecond)
+		time.Sleep(500 * time.Microsecond)
 		var m runtime.MemStats
 		runtime.ReadMemStats(&m)
 		// For info on each, see: https://golang.org/pkg/runtime/#MemStats
