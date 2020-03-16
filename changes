@@ -1,0 +1,3 @@
+[
+{ "playlist": {"user_id": "1", "song_ids": [ "6", "8", "11" ] }},{ "remove_playlist_id": "2" },{"playlist_id": "1", "song_id": "2"}
+]
