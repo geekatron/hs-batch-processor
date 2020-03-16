@@ -1,6 +1,7 @@
-# Ignore the Output file & built binary
+# Ignore the Output file, binary and performance log
 output.json
 hs-batch-processor
+performance.log
 
 # Binaries for programs and plugins
 *.exe
